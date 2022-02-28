@@ -2,27 +2,95 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
+class SquareD extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            box: '',
+            row: null,
+            column: null,
+            box: null,
+            visibleRow: null,
+            visibleColumn: null,
         };
     }
 
     render() {
-        {console.log(this.props)}
-        return (
-            <button className="square">
-                {this.props.box}
-            </button>
-        );
+        if(this.props.visibleRow && this.props.visibleColumn){
+            return (
+                <button className="squared">
+                    {this.props.box}
+                </button>
+            );
+        }else if(this.props.visibleColumn){
+            return (
+                <button className="squared">
+                    {this.props.column}
+                </button>
+            );
+        }else if(this.props.visibleRow){
+            return (
+                <button className="squared">
+                    {this.props.row}
+                </button>
+            );
+        }else{
+            return (
+                <button className="squared">
+                    {}
+                </button>
+            );
+        }
+    }
+}
+
+class SquareG extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            row: null,
+            column: null,
+            box: null,
+            visibleRow: null,
+            visibleColumn: null,
+        };
+    }
+
+    render() {
+        if(this.props.visibleRow && this.props.visibleColumn){
+            return (
+                <button className="squareg">
+                    {this.props.box}
+                </button>
+            );
+        }else if(this.props.visibleColumn){
+            return (
+                <button className="squareg">
+                    {this.props.column}
+                </button>
+            );
+        }else if(this.props.visibleRow){
+            return (
+                <button className="squareg">
+                    {this.props.row}
+                </button>
+            );
+        }else{
+            return (
+                <button className="squareg">
+                    {}
+                </button>
+            );
+        }
     }
 }
 
 class Board extends React.Component {
-    renderSquare(row,column) {
-        return <Square box={row+column} />;
+    renderSquareD(row,column,visibleR,visibleC) {
+        return <SquareD row={row} column={column} box={row+column} visibleRow={visibleR} visibleColumn={visibleC} />;
+    }
+
+    renderSquareG(row,column,visibleR,visibleC) {
+        return <SquareG row={row} column={column} box={row+column} visibleRow={visibleR} visibleColumn={visibleC} />;
     }
 
     render() {
@@ -32,84 +100,84 @@ class Board extends React.Component {
             <div>
                 <div className="status">{status}</div>
                 <div className="board-row">
-                    {this.renderSquare('a',1)}
-                    {this.renderSquare('a',2)}
-                    {this.renderSquare('a',3)}
-                    {this.renderSquare('a',4)}
-                    {this.renderSquare('a',5)}
-                    {this.renderSquare('a',6)}
-                    {this.renderSquare('a',7)}
-                    {this.renderSquare('a',8)}
+                    {this.renderSquareD('a',1, true, false)}
+                    {this.renderSquareG('a',2, false, false)}
+                    {this.renderSquareD('a',3, false, false)}
+                    {this.renderSquareG('a',4, false, false)}
+                    {this.renderSquareD('a',5, false, false)}
+                    {this.renderSquareG('a',6, false, false)}
+                    {this.renderSquareD('a',7, false, false)}
+                    {this.renderSquareG('a',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('b',1)}
-                    {this.renderSquare('b',2)}
-                    {this.renderSquare('b',3)}
-                    {this.renderSquare('b',4)}
-                    {this.renderSquare('b',5)}
-                    {this.renderSquare('b',6)}
-                    {this.renderSquare('b',7)}
-                    {this.renderSquare('b',8)}
+                    {this.renderSquareG('b',1, true, false)}
+                    {this.renderSquareD('b',2, false, false)}
+                    {this.renderSquareG('b',3, false, false)}
+                    {this.renderSquareD('b',4, false, false)}
+                    {this.renderSquareG('b',5, false, false)}
+                    {this.renderSquareD('b',6, false, false)}
+                    {this.renderSquareG('b',7, false, false)}
+                    {this.renderSquareD('b',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('c',1)}
-                    {this.renderSquare('c',2)}
-                    {this.renderSquare('c',3)}
-                    {this.renderSquare('c',4)}
-                    {this.renderSquare('c',5)}
-                    {this.renderSquare('c',6)}
-                    {this.renderSquare('c',7)}
-                    {this.renderSquare('c',8)}
+                    {this.renderSquareD('c',1, true, false)}
+                    {this.renderSquareG('c',2, false, false)}
+                    {this.renderSquareD('c',3, false, false)}
+                    {this.renderSquareG('c',4, false, false)}
+                    {this.renderSquareD('c',5, false, false)}
+                    {this.renderSquareG('c',6, false, false)}
+                    {this.renderSquareD('c',7, false, false)}
+                    {this.renderSquareG('c',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('d',1)}
-                    {this.renderSquare('d',2)}
-                    {this.renderSquare('d',3)}
-                    {this.renderSquare('d',4)}
-                    {this.renderSquare('d',5)}
-                    {this.renderSquare('d',6)}
-                    {this.renderSquare('d',7)}
-                    {this.renderSquare('d',8)}
+                    {this.renderSquareG('d',1, true, false)}
+                    {this.renderSquareD('d',2, false, false)}
+                    {this.renderSquareG('d',3, false, false)}
+                    {this.renderSquareD('d',4, false, false)}
+                    {this.renderSquareG('d',5, false, false)}
+                    {this.renderSquareD('d',6, false, false)}
+                    {this.renderSquareG('d',7, false, false)}
+                    {this.renderSquareD('d',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('e',1)}
-                    {this.renderSquare('e',2)}
-                    {this.renderSquare('e',3)}
-                    {this.renderSquare('e',4)}
-                    {this.renderSquare('e',5)}
-                    {this.renderSquare('e',6)}
-                    {this.renderSquare('e',7)}
-                    {this.renderSquare('e',8)}
+                    {this.renderSquareD('e',1, true, false)}
+                    {this.renderSquareG('e',2, false, false)}
+                    {this.renderSquareD('e',3, false, false)}
+                    {this.renderSquareG('e',4, false, false)}
+                    {this.renderSquareD('e',5, false, false)}
+                    {this.renderSquareG('e',6, false, false)}
+                    {this.renderSquareD('e',7, false, false)}
+                    {this.renderSquareG('e',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('f',1)}
-                    {this.renderSquare('f',2)}
-                    {this.renderSquare('f',3)}
-                    {this.renderSquare('f',4)}
-                    {this.renderSquare('f',5)}
-                    {this.renderSquare('f',6)}
-                    {this.renderSquare('f',7)}
-                    {this.renderSquare('f',8)}
+                    {this.renderSquareG('f',1, true, false)}
+                    {this.renderSquareD('f',2, false, false)}
+                    {this.renderSquareG('f',3, false, false)}
+                    {this.renderSquareD('f',4, false, false)}
+                    {this.renderSquareG('f',5, false, false)}
+                    {this.renderSquareD('f',6, false, false)}
+                    {this.renderSquareG('f',7, false, false)}
+                    {this.renderSquareD('f',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('g',1)}
-                    {this.renderSquare('g',2)}
-                    {this.renderSquare('g',3)}
-                    {this.renderSquare('g',4)}
-                    {this.renderSquare('g',5)}
-                    {this.renderSquare('g',6)}
-                    {this.renderSquare('g',7)}
-                    {this.renderSquare('g',8)}
+                    {this.renderSquareD('g',1, true, false)}
+                    {this.renderSquareG('g',2, false, false)}
+                    {this.renderSquareD('g',3, false, false)}
+                    {this.renderSquareG('g',4, false, false)}
+                    {this.renderSquareD('g',5, false, false)}
+                    {this.renderSquareG('g',6, false, false)}
+                    {this.renderSquareD('g',7, false, false)}
+                    {this.renderSquareG('g',8, false, false)}
                 </div>
                 <div className="board-row">
-                    {this.renderSquare('a',1)}
-                    {this.renderSquare('a',2)}
-                    {this.renderSquare('a',3)}
-                    {this.renderSquare('a',4)}
-                    {this.renderSquare('a',5)}
-                    {this.renderSquare('a',6)}
-                    {this.renderSquare('a',7)}
-                    {this.renderSquare('a',8)}
+                    {this.renderSquareG('h',1, true, true)}
+                    {this.renderSquareD('h',2, false, true)}
+                    {this.renderSquareG('h',3, false, true)}
+                    {this.renderSquareD('h',4, false, true)}
+                    {this.renderSquareG('h',5, false, true)}
+                    {this.renderSquareD('h',6, false, true)}
+                    {this.renderSquareG('h',7, false, true)}
+                    {this.renderSquareD('h',8, false, true)}
                 </div>
             </div>
         );

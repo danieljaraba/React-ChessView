@@ -17,19 +17,34 @@ ol, ul {
     margin-bottom: 10px;
 }
 
-.square {
+.squared {
     background: #fff;
     border: 1px solid #999;
     float: left;
     font-size: 14px;
     font-weight: bold;
     line-height: 34px;
-    height: 90px;
+    height: 70px;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: left;
-    width: 90px;
+    width: 70px;
+}
+
+.squareg {
+    background: #7e9f51;
+    border: 1px solid #999;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 70px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: left;
+    width: 70px;
 }
 
 .square:focus {
