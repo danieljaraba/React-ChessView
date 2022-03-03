@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style>
+            body {
+                font: 24px "Century Gothic", Futura, sans-serif;
+                margin: 20px;
+            }
+            
+            ol, ul {
+                padding-left: 30px;
+            }
+            
+            .board-row:after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+            
+            .status {
+                margin-bottom: 10px;
+            }
+            
+            .squared {
+                background: #fff;
+                border: 1px solid #999;
+                float: left;
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 34px;
+                height: 70px;
+                margin-right: -1px;
+                margin-top: -1px;
+                padding: 0;
+                text-align: left;
+                width: 70px;
+            }
+            
+            .squareg {
+                background: #7e9f51;
+                border: 1px solid #999;
+                float: left;
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 34px;
+                height: 70px;
+                margin-right: -1px;
+                margin-top: -1px;
+                padding: 0;
+                text-align: left;
+                width: 70px;
+            }
+            
+            .square:focus {
+                outline: none;
+            }
+            
+            .kbd-navigation .square:focus {
+                background: #ddd;
+            }
+            
+            .game {
+                display: table;
+            }
+            
+            .game-info {
+                margin-left: 20px;
+            }
+        </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="playButton"></div>
+    <script type="text/babel">
+        class SquareD extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    row: null,
+                    column: null,
+                    box: null,
+                    visibleRow: null,
+                    visibleColumn: null,
+                };
+            }
+
+            validateCell() {
+                console.log(this.props.row + this.props.column + randomCell)
+                if(this.props.row+this.props.column===randomCell){
+                    randomCell = randomCell = String.fromCharCode(Math.floor(Math.random() * 8)+97)+Math.floor(Math.random() * 8)
+                    alert("Prueba")
+                    location.reload();
+                    
+                }
+            }
+        
+            render() {
+                if(this.props.visibleRow && this.props.visibleColumn){
+                    return (
+                        <button className="squared"onClick={()=>  this.validateCell()}>
+                            {this.props.box}
+                        </button>
+                    );
+                }else if(this.props.visibleColumn){
+                    return (
+                        <button className="squared"onClick={()=>  this.validateCell()}>
+                            {this.props.column}
+                        </button>
+                    );
+                }else if(this.props.visibleRow){
+                    return (
+                        <button className="squared"onClick={()=>  this.validateCell()}>
+                            {this.props.row}
+                        </button>
+                    );
+                }else{
+                    return (
+                        <button className="squared"onClick={()=>  this.validateCell()}>
+                            {}
+                        </button>
+                    );
+                }
+            }
+        }
+        
+        var randomCell = '';
+        class SquareG extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    row: null,
+                    column: null,
+                    box: null,
+                    visibleRow: null,
+                    visibleColumn: null,
+                };
+            }
+        
+        
+        
+            validateCell() {
+                if(this.props.row+this.props.column===randomCell){
+                    randomCell = randomCell = String.fromCharCode(Math.floor(Math.random() * 9)+97)+Math.floor(Math.random() * 9)
+                    alert("Prueba")
+                    alert()
+                    location.reload();
+                    
+                }
+            }
+        
+            render() {
+                
+                if(this.props.visibleRow && this.props.visibleColumn){
+                    return (
+                        <button className="squareg"
+                        onClick={()=>  this.validateCell()}>
+                            {this.props.box}
+                        </button>
+                    );
+                }else if(this.props.visibleColumn){
+                    return (
+                        <button className="squareg"onClick={()=>  this.validateCell()}>
+                            {this.props.column}
+                        </button>
+                    );
+                }else if(this.props.visibleRow){
+                    return (
+                        <button className="squareg"onClick={()=>  this.validateCell()}>
+                            {this.props.row}
+                        </button>
+                    );
+                }else{
+                    return (
+                        <button className="squareg"onClick={()=>  this.validateCell()}>
+                            {}
+                        </button>
+                    );
+                }
+            }
+        }
+
+        var a = (function(){
+            randomCell = String.fromCharCode(Math.floor(Math.random() * 9)+97)+Math.floor(Math.random() * 9)
+          }).call(this);
+        
+        
+        class Board extends React.Component {
+        
+            constructor(props){
+                super(props);
+                this.state = {
+                    time : 60,
+                    attemps : 0,
+                    hits : 0
+                }
+            }
+            
+            renderSquareD(row,column,visibleR,visibleC) {
+                return <SquareD row={row} column={column} box={row+column} visibleRow={visibleR} visibleColumn={visibleC} />;
+            }
+        
+            renderSquareG(row,column,visibleR,visibleC) {
+                return <SquareG row={row} column={column} box={row+column} visibleRow={visibleR} visibleColumn={visibleC} />;
+            }
+        
+            validateCell(){
+                SquareG.validateCell('h','1')
+            }
+            
+            
+            render() {
+                const status = 'Chess View';
+        
+                
+                return (
+                    
+                    <div>
+                        <div className="status">{status}</div>
+                        <div className="board-row">
+                            {this.renderSquareD('a',1, true, false)}
+                            {this.renderSquareG('a',2, false, false)}
+                            {this.renderSquareD('a',3, false, false)}
+                            {this.renderSquareG('a',4, false, false)}
+                            {this.renderSquareD('a',5, false, false)}
+                            {this.renderSquareG('a',6, false, false)}
+                            {this.renderSquareD('a',7, false, false)}
+                            {this.renderSquareG('a',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareG('b',1, true, false)}
+                            {this.renderSquareD('b',2, false, false)}
+                            {this.renderSquareG('b',3, false, false)}
+                            {this.renderSquareD('b',4, false, false)}
+                            {this.renderSquareG('b',5, false, false)}
+                            {this.renderSquareD('b',6, false, false)}
+                            {this.renderSquareG('b',7, false, false)}
+                            {this.renderSquareD('b',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareD('c',1, true, false)}
+                            {this.renderSquareG('c',2, false, false)}
+                            {this.renderSquareD('c',3, false, false)}
+                            {this.renderSquareG('c',4, false, false)}
+                            {this.renderSquareD('c',5, false, false)}
+                            {this.renderSquareG('c',6, false, false)}
+                            {this.renderSquareD('c',7, false, false)}
+                            {this.renderSquareG('c',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareG('d',1, true, false)}
+                            {this.renderSquareD('d',2, false, false)}
+                            {this.renderSquareG('d',3, false, false)}
+                            {this.renderSquareD('d',4, false, false)}
+                            {this.renderSquareG('d',5, false, false)}
+                            {this.renderSquareD('d',6, false, false)}
+                            {this.renderSquareG('d',7, false, false)}
+                            {this.renderSquareD('d',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareD('e',1, true, false)}
+                            {this.renderSquareG('e',2, false, false)}
+                            {this.renderSquareD('e',3, false, false)}
+                            {this.renderSquareG('e',4, false, false)}
+                            {this.renderSquareD('e',5, false, false)}
+                            {this.renderSquareG('e',6, false, false)}
+                            {this.renderSquareD('e',7, false, false)}
+                            {this.renderSquareG('e',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareG('f',1, true, false)}
+                            {this.renderSquareD('f',2, false, false)}
+                            {this.renderSquareG('f',3, false, false)}
+                            {this.renderSquareD('f',4, false, false)}
+                            {this.renderSquareG('f',5, false, false)}
+                            {this.renderSquareD('f',6, false, false)}
+                            {this.renderSquareG('f',7, false, false)}
+                            {this.renderSquareD('f',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareD('g',1, true, false)}
+                            {this.renderSquareG('g',2, false, false)}
+                            {this.renderSquareD('g',3, false, false)}
+                            {this.renderSquareG('g',4, false, false)}
+                            {this.renderSquareD('g',5, false, false)}
+                            {this.renderSquareG('g',6, false, false)}
+                            {this.renderSquareD('g',7, false, false)}
+                            {this.renderSquareG('g',8, false, false)}
+                        </div>
+                        <div className="board-row">
+                            {this.renderSquareG('h',1, true, true)}
+                            {this.renderSquareD('h',2, false, true)}
+                            {this.renderSquareG('h',3, false, true)}
+                            {this.renderSquareD('h',4, false, true)}
+                            {this.renderSquareG('h',5, false, true)}
+                            {this.renderSquareD('h',6, false, true)}
+                            {this.renderSquareG('h',7, false, true)}
+                            {this.renderSquareD('h',8, false, true)}
+                        </div>
+                    </div>
+                );
+            }
+        }
+        
+        class Game extends React.Component {
+        
+            
+        
+            render() {
+                return (
+                    
+                    <div className="game">
+                        <div className="game-board">
+                            
+                            <Board />
+                        </div>
+                        <div>
+                            {randomCell}
+                        </div>
+                        <div className="game-info">
+                            <div>{/* status */}A</div>
+                            <ol>{/* TODO */}B</ol>
+                        </div>
+                    </div>
+                );
+            }
+        }
+        
+        // ========================================
+        
+        ReactDOM.render(
+            <Game />,
+            document.getElementById('root')
+        );
+
+
+    </script>
+    
+  </body>
+</html>
